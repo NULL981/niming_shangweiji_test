@@ -47,11 +47,13 @@ void usart1_niming_report(u8 fun,u8*data,u8 len)
 int i = 0;
 u8 data1 = 0x00;
 u8 data2[4];
+short a = 0;
+
 int main (void){//主程序
 	//u8 a=7,b=8;
 	u8 fun = 0xA1;
 	u8 data[] = {2,100,2,100,2,100,2,100,2,100,2,100};
-	unsigned int a = 0;
+	
 	 //
 	
 	//初始化程序
@@ -76,12 +78,10 @@ int main (void){//主程序
 		
 		
 		/*  */
-		data2[0] = a & 0xFF000000 >> 24;
-		data2[1] = a & 0x00FF0000 >> 16;
-		data2[2] = a & 0x0000FF00 >> 8;
-		data2[3] = a & 0x000000FF;
+		data2[0] = (a>>8) & 0xFF;//(a & 0xFF000000) >> 24;
+		data2[1] = a & 0xFF;
 		//usart1_niming_report(fun,data,12);
-		usart1_niming_report(fun,data2,4);//data1
+		usart1_niming_report(fun,data2,2);//data1
 		a++;
 		if(a == 1000){
 			a = 0;
